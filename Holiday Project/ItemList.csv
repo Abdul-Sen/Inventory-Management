@@ -1,12 +1,16 @@
 ID,Name,Price
-1000,Bicycle,94
-1001,Chair,33
-1002,Window Cover,90
-1003,Table,87
-1004,Pink Tower,96
-1005,Trampolene,18
-1006,Jacket,55
-1007,Shoose,18
-1008,Glasses,56
-1009,Toy Truck,95
-1010,Pillow,38
+1000,Bicycle,27
+1001,Chair,99
+1002,Window Cover,68
+1003,Table,36
+1004,Pink Tower,39
+1005,Trampolene,57
+1006,Jacket,1
+1007,Shoose,22
+1008,Glasses,80
+1009,Toy Truck,61
+1010,Pillow,96
+1011,Apple,23
+1012,Oranges,43
+
+999,HighLighter,88

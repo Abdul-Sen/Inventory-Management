@@ -21,5 +21,3 @@ namespace wrk {
 
 	std::ostream& operator<<(std::ostream& os, const Item& i);
 }
-
-

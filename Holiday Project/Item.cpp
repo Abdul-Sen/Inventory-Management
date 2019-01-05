@@ -37,6 +37,7 @@ void wrk::Item::display(std::ostream & os,bool headingWanted) const
 	os << this->i_name;
 	os.width(FW);
 	os << this->i_price;
+	os << "\n";
 }
 
 void wrk::Item::updateID(int ui_id)
@@ -65,4 +66,3 @@ std::ostream & wrk::operator<<(std::ostream & os, const Item & i)
 	i.display(os, false);
 	return os;
 }
-
