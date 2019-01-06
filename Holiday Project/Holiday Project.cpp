@@ -14,8 +14,8 @@ wrk::Item addItem() {
 	std::cout << "\nProduct ID: ";
 	std::cin >> id;
 	std::cout << "\nProduct Name: ";
-	std::cin >> name;
-	//std::getline(std::cin, name);
+	std::cin.ignore(1);
+	std::getline(std::cin, name);
 	std::cout << "\nProduct Price: ";
 	std::cin >> price;
 	//TODO: Check if id,name, price are correct i.e no other item has this id, name is just char, and price is float
@@ -24,6 +24,41 @@ wrk::Item addItem() {
 	ofs << "\n" << id << ',' << name << ',' <<price;
 	ofs.close();
 	return temp;
+}
+
+//Finds product by ID and update product
+void UpdateProduct(std::vector<wrk::Item>& VecItems) {
+	std::cout << "Enter Product ID >> ";
+	int pid;
+	std::string t_name;
+	float t_price;
+	std::cin >> pid;
+	for (auto& currentProduct : VecItems)
+	{
+		if (currentProduct.getID() == pid)
+		{
+			std::cout << "\nNew Name>> ";
+			std::cin >> t_name;
+			std::cout << "\nNew Price>> ";
+			std::cin >> t_price;
+			currentProduct.updateName(t_name);
+			currentProduct.updatePrice(t_price);
+
+			//updating file
+			std::fstream fs("ItemList.csv");
+			std::string line;
+			std::getline(fs, line, '\n');//heading
+			while (!fs.eof())
+			{
+				std::getline(fs, line, '\n');
+				if (std::stoi(line.substr(0,line.find(','))) == pid)
+				{
+					//fs.seekg('\r');
+					//TODO: Move to beginning of this line and override it
+				}
+			}
+		}
+	}
 }
 
 //gets all the items from the .csv file and adds them to the sent array
@@ -82,6 +117,8 @@ int main()
 			GetItems(VecItems);
 			ViewItems(VecItems);
 			break;
+		case(3):
+			UpdateProduct(VecItems);
 		case(5):
 			std::cout << "\nGood Bye!";
 			break;

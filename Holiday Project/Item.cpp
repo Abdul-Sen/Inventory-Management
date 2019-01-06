@@ -40,6 +40,21 @@ void wrk::Item::display(std::ostream & os,bool headingWanted) const
 	os << "\n";
 }
 
+int wrk::Item::getID()
+{
+	return i_ID;
+}
+
+std::string & wrk::Item::getName()
+{
+	return i_name;
+}
+
+float wrk::Item::getPrice()
+{
+	return i_price;
+}
+
 void wrk::Item::updateID(int ui_id)
 {
 	this->i_ID = ui_id;

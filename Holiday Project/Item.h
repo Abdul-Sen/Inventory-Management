@@ -11,6 +11,9 @@ namespace wrk {
 		Item(int ui_id, std::string& ui_name, float ui_price); 
 
 		void display(std::ostream&, bool headingWanted) const; // r
+		int getID();
+		std::string& getName();
+		float getPrice();
 
 		void updateID(int ui_id); //u
 		void updateName(std::string& ui_name);
