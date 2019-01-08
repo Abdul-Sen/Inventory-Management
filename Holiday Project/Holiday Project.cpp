@@ -47,14 +47,18 @@ void UpdateProduct(std::vector<wrk::Item>& VecItems) {
 			//updating file
 			std::fstream fs("ItemList.csv");
 			std::string line;
+			long pos = 0;
 			std::getline(fs, line, '\n');//heading
+
 			while (!fs.eof())
 			{
 				std::getline(fs, line, '\n');
-				if (std::stoi(line.substr(0,line.find(','))) == pid)
+				if (std::stoi(line.substr(0,line.find(','))) == pid) //if line with same product id found
 				{
-					//fs.seekg('\r');
-					//TODO: Move to beginning of this line and override it
+					//pos = fs.tellp();
+					//fs.seekp(pos - 5);
+					//fs.
+					//fs.see
 				}
 			}
 		}
@@ -87,6 +91,7 @@ void GetItems(std::vector<wrk::Item>& VecItems) {
 		}
 	}
 }
+
 void ViewItems(std::vector<wrk::Item>& VecItems){
 	VecItems[0].display(std::cout, true);
 	
@@ -95,6 +100,48 @@ void ViewItems(std::vector<wrk::Item>& VecItems){
 		std::cout << (*itr);
 	}
 }
+
+// finds product by id and deletes it
+void deleteProduct(std::vector<wrk::Item>& VecItems) {
+	std::cout << "Enter Product ID >> ";
+	int pid;
+	std::string t_name;
+	float t_price;
+	std::cin >> pid;
+	for (std::vector<wrk::Item>::iterator itr = VecItems.begin(); itr != VecItems.end(); itr++)
+	{
+		if ((*itr).getID() == pid)
+		{
+			(*itr).display(std::cout, true);
+			
+
+			//line.replace(line.find(deleteline), deleteline.length(), "");
+
+			//updating file
+			std::fstream fs("ItemList.csv");
+			std::string line;
+			long pos = 0;
+			std::getline(fs, line, '\n');//heading
+
+			while (!fs.eof())
+			{
+				std::getline(fs, line, '\n');
+				if (std::stoi(line.substr(0, line.find(','))) == pid) //if line with same product id found
+				{
+					//line.replace(line.find(pid), line.length(), "");
+					//pos = fs.tellp();
+					//fs.seekp(pos - 5);
+					//fs.
+					//fs.see
+				}
+			}
+			VecItems.erase(itr);
+			break;
+		}
+	}
+}
+
+
 int main()
 {
 	std::vector<wrk::Item> VecItems;
@@ -119,6 +166,9 @@ int main()
 			break;
 		case(3):
 			UpdateProduct(VecItems);
+			break;
+		case(4):
+			deleteProduct(VecItems);
 		case(5):
 			std::cout << "\nGood Bye!";
 			break;

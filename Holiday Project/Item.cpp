@@ -73,7 +73,9 @@ void wrk::Item::updatePrice(float ui_price)
 
 wrk::Item::~Item()
 {
-
+	this->i_ID = 0;
+	this->i_name = "";
+	this->i_price = 0;
 }
 
 std::ostream & wrk::operator<<(std::ostream & os, const Item & i)
