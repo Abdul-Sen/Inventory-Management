@@ -88,7 +88,7 @@ std::ostream & wrk::operator<<(std::ostream & os, const Item & i)
 	return os;
 }
 
-void wrk::readFile(std::string fsName, std::vector<wrk::Item> VecItems)
+void wrk::readFile(std::string fsName, std::vector<wrk::Item>& VecItems)
 {
 	int id = 0;
 	std::string name;
@@ -136,12 +136,17 @@ void wrk::writeOneRow(std::string fsName,Item & VectorItem)
 
 }
 
-void wrk::viewItems(std::ofstream & ifs, std::vector<wrk::Item>& VecItems)
+//void wrk::updateFile(std::string fsName, Item& VectorItem)
+//{
+//
+//}
+
+void wrk::viewItems(std::ostream & os, std::vector<wrk::Item>& VecItems)
 {
-	VecItems[0].display(ifs, true);
+	VecItems[0].display(os, true);
 	for (std::vector < wrk::Item>::iterator itr = VecItems.begin() + 1; itr != VecItems.end(); itr++)
 	{
-		ifs << (*itr);
+		os << (*itr);
 	}
 }
 
@@ -155,16 +160,16 @@ void wrk::sortObjects(std::vector<wrk::Item>& vecItems)
 }
 
 //deletes a single Item from a vector of products
-void wrk::deleteItem(std::vector<wrk::Item>& VecItems, std::ostream & os, std::istream & is)
+void wrk::deleteItem(std::vector<wrk::Item>& VecItems)
 {
-	os << "Enter Product ID >> ";
+	std::cout << "Enter Product ID >> ";
 	int pid;
-	is >> pid;
+	std::cin >> pid;
 	for (std::vector<wrk::Item>::iterator itr = VecItems.begin(); itr != VecItems.end(); itr++)
 	{
 		if ((*itr).getID() == pid)
 		{
-			(*itr).display(os, true);
+			(*itr).display(std::cout, true);
 			VecItems.erase(itr);
 			break;
 		}
@@ -185,4 +190,35 @@ wrk::Item wrk::createItem()
 	std::cin >> price;
 	//TODO: Check if id,name, price are correct i.e no other item has this id, name is just char, and price is float
 	return Item(id, name, price);
+}
+
+void wrk::updateItem(std::vector<wrk::Item>& VecItems)
+{
+	std::cout << "\nEnter Product ID >> ";
+	int pid;
+	std::cin >> pid;
+	std::cin.clear();
+
+	std::cout<<"\nEnter New Name:";
+	std::string t_name;
+	std::cin >> t_name;
+	//std::getline(std::cin, t_name);
+
+	std::cout << "\nEnter New Price:";
+	float t_price;
+	std::cin >> t_price;
+
+
+	std::find_if(VecItems.begin(), VecItems.end(), [pid, &t_name,t_price](wrk::Item& current) {
+		if (current.getID() == pid)//TODO: Start from here
+		{
+
+			std::cout << current;
+			current.updateID(pid);
+			current.updateName(t_name);
+			current.updatePrice(t_price);
+			return true;
+		}
+		return false;
+	});
 }
